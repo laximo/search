@@ -1,0 +1,10 @@
+# IntelliJ - PhpStorm and PyCharm
+.idea
+*.iml
+*.ipr
+*.iws
+
+docs
+vendor
+/tests
+
