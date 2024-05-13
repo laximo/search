@@ -44,6 +44,7 @@ class SearchService extends Service
     public const ADVANCED_SEARCH_OPTION_DETECT_CROSSOEMS = 'searchCrossOems';
     public const ADVANCED_SEARCH_OPTION_DETECT_CROSSPARTS = 'searchCrossDetails';
     public const ADVANCED_SEARCH_OPTION_DETECT_ORIGINALS = 'originals';
+    public const ADVANCED_SEARCH_OPTION_DETECT_ALLSPARES = 'allSpares';
 
     public const ADVANCED_SEARCH_SEARCHBY_OFFER = 'OFFER';
     public const ADVANCED_SEARCH_SEARCHBY_OFFER_AND_DETAIL = 'OFFER_AND_DETAIL';
@@ -72,7 +73,8 @@ class SearchService extends Service
             'searchBy' => $searchBy,
             'tags' => $tags,
             'tagsLogicOperation' => $tagConcatenateByAnd ? 'AND' : 'OR',
-            'originals' => in_array(self::ADVANCED_SEARCH_OPTION_DETECT_ORIGINALS, $options) ? 'true' : 'false',
+            'originals' => in_array(self::ADVANCED_SEARCH_OPTION_DETECT_ALLSPARES, $options) ? null :
+                (in_array(self::ADVANCED_SEARCH_OPTION_DETECT_ORIGINALS, $options) ? 'true' : 'false'),
             'locale' => $locale,
         ];
 
