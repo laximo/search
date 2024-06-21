@@ -89,7 +89,7 @@ class SearchService extends Service
         return $this->makeRequest(UsSearchResultPageResponse::class, 'GET', 'search', 'search', [
             'autoInfoId' => $autoInfoId,
             'query' => $query,
-            'tags' => implode('&', $tags),
+            'tags' => implode(' ', $tags),
             'locale' => $locale,
             'page' => $page,
             'size' => $size,
