@@ -11,6 +11,7 @@ use Laximo\Search\responseObjects\UsOfferPageResponse;
 use Laximo\Search\responseObjects\UsSearchByOemsResponse;
 use Laximo\Search\responseObjects\UsSearchResultPageResponse;
 use Laximo\Search\responseObjects\UsStringsResponse;
+use Laximo\Search\responseObjects\UsTagsCountsExtResponse;
 use Laximo\Search\responseObjects\UsTagsCountsResponse;
 use Laximo\Search\responseObjects\UsUser;
 use Laximo\Search\responseObjects\UsVehicleListResponse;
@@ -109,6 +110,15 @@ class SearchService extends Service
     {
         return $this->makeRequest(UsTagsCountsResponse::class, 'GET', 'search', 'countByTags', [
             'autoInfoId' => $autoInfoId,
+        ]);
+    }
+
+    public function countByTagsExt(?int $autoInfoId = null, ?string $query = null, string $locale = 'ru_RU'): UsTagsCountsExtResponse
+    {
+        return $this->makeRequest(UsTagsCountsExtResponse::class, 'GET', 'search', 'countByTagsExt', [
+            'autoInfoId' => $autoInfoId,
+            'query'      => $query,
+            'locale'     => $locale,
         ]);
     }
 
