@@ -41,14 +41,21 @@ class SearchService extends Service
      * Детектировать артикулы в запросе
      */
     public const ADVANCED_SEARCH_OPTION_DETECT_OEMS = 'detectOems';
+
     public const ADVANCED_SEARCH_OPTION_DETECT_CROSSBRANDS = 'searchCrossBrands';
+
     public const ADVANCED_SEARCH_OPTION_DETECT_CROSSOEMS = 'searchCrossOems';
+
     public const ADVANCED_SEARCH_OPTION_DETECT_CROSSPARTS = 'searchCrossDetails';
+
     public const ADVANCED_SEARCH_OPTION_DETECT_ORIGINALS = 'originals';
+
     public const ADVANCED_SEARCH_OPTION_DETECT_ALLSPARES = 'allSpares';
 
     public const ADVANCED_SEARCH_SEARCHBY_OFFER = 'OFFER';
+
     public const ADVANCED_SEARCH_SEARCHBY_OFFER_AND_DETAIL = 'OFFER_AND_DETAIL';
+
     public const ADVANCED_SEARCH_SEARCHBY_OFFER_AND_DETAIL_AND_CROSS = 'OFFER_AND_DETAIL_AND_CROSS';
 
     public function advancedSearch(
@@ -63,20 +70,20 @@ class SearchService extends Service
         int    $size = 20): UsSearchResultPageResponse
     {
         $params = [
-            'autoInfoId' => $autoInfoId,
-            'query' => $query,
+            'autoInfoId'               => $autoInfoId,
+            'query'                    => $query,
             'detectVehicleIdentString' => in_array(self::ADVANCED_SEARCH_OPTION_DETECT_VEHICLE, $options) ? 'true' : 'false',
-            'detectBrands' => in_array(self::ADVANCED_SEARCH_OPTION_DETECT_BRANDS, $options) ? 'true' : 'false',
-            'detectOems' => in_array(self::ADVANCED_SEARCH_OPTION_DETECT_OEMS, $options) ? 'true' : 'false',
-            'searchCrossBrands' => in_array(self::ADVANCED_SEARCH_OPTION_DETECT_CROSSBRANDS, $options) ? 'true' : 'false',
-            'searchCrossOems' => in_array(self::ADVANCED_SEARCH_OPTION_DETECT_CROSSOEMS, $options) ? 'true' : 'false',
-            'searchCrossDetails' => in_array(self::ADVANCED_SEARCH_OPTION_DETECT_CROSSPARTS, $options) ? 'true' : 'false',
-            'searchBy' => $searchBy,
-            'tags' => $tags,
-            'tagsLogicOperation' => $tagConcatenateByAnd ? 'AND' : 'OR',
-            'originals' => in_array(self::ADVANCED_SEARCH_OPTION_DETECT_ALLSPARES, $options) ? null :
+            'detectBrands'             => in_array(self::ADVANCED_SEARCH_OPTION_DETECT_BRANDS, $options) ? 'true' : 'false',
+            'detectOems'               => in_array(self::ADVANCED_SEARCH_OPTION_DETECT_OEMS, $options) ? 'true' : 'false',
+            'searchCrossBrands'        => in_array(self::ADVANCED_SEARCH_OPTION_DETECT_CROSSBRANDS, $options) ? 'true' : 'false',
+            'searchCrossOems'          => in_array(self::ADVANCED_SEARCH_OPTION_DETECT_CROSSOEMS, $options) ? 'true' : 'false',
+            'searchCrossDetails'       => in_array(self::ADVANCED_SEARCH_OPTION_DETECT_CROSSPARTS, $options) ? 'true' : 'false',
+            'searchBy'                 => $searchBy,
+            'tags'                     => $tags,
+            'tagsLogicOperation'       => $tagConcatenateByAnd ? 'AND' : 'OR',
+            'originals'                => in_array(self::ADVANCED_SEARCH_OPTION_DETECT_ALLSPARES, $options) ? null :
                 (in_array(self::ADVANCED_SEARCH_OPTION_DETECT_ORIGINALS, $options) ? 'true' : 'false'),
-            'locale' => $locale,
+            'locale'                   => $locale,
         ];
 
         return $this->makeRequest(UsSearchResultPageResponse::class, 'POST', 'search', 'advancedSearch', [
@@ -89,11 +96,11 @@ class SearchService extends Service
     {
         return $this->makeRequest(UsSearchResultPageResponse::class, 'GET', 'search', 'search', [
             'autoInfoId' => $autoInfoId,
-            'query' => $query,
-            'tags' => implode(' ', $tags),
-            'locale' => $locale,
-            'page' => $page,
-            'size' => $size,
+            'query'      => $query,
+            'tags'       => implode(' ', $tags),
+            'locale'     => $locale,
+            'page'       => $page,
+            'size'       => $size,
         ]);
     }
 
@@ -101,8 +108,8 @@ class SearchService extends Service
     {
         return $this->makeRequest(UsSearchByOemsResponse::class, 'GET', 'search', 'searchByOems', [
             'autoInfoId' => $autoInfoId,
-            'oems' => $oems,
-            'locale' => $locale,
+            'oems'       => $oems,
+            'locale'     => $locale,
         ]);
     }
 
@@ -122,10 +129,11 @@ class SearchService extends Service
         ]);
     }
 
-    public function complete(string $query): UsStringsResponse
+    public function complete(string $query, string $locale = 'ru_RU'): UsStringsResponse
     {
         return $this->makeRequest(UsStringsResponse::class, 'GET', 'search', 'complete', [
-            'query' => $query,
+            'query'  => $query,
+            'locale' => $locale
         ]);
     }
 
@@ -134,12 +142,17 @@ class SearchService extends Service
      *****************************/
 
     public const CHARSET_UTF8 = 'UTF-8';
+
     public const CHARSET_WINDOWS1251 = 'windows-1251';
+
     public const CHARSET_UTF16BE = 'UTF-16BE';
+
     public const CHARSET_UTF16LE = 'UTF-16LE';
 
     public const DELIMITER_TAB = "\t";
+
     public const DELIMITER_COMMA = ",";
+
     public const DELIMITER_SEMICOLON = ";";
 
     public function offersProcess(string $tmpFileName, string $userFileName, ?string $delimiter = null, ?string $charsetName = null): UsOffer
@@ -193,17 +206,17 @@ class SearchService extends Service
     {
         return $this->makeRequest(UsVehicleListResponse::class, 'GET', 'vehicle', 'identify', [
             'identString' => $identString,
-            'locale' => $locale,
+            'locale'      => $locale,
         ]);
     }
 
     public function vehicleIdentifyBySsd(string $catalog, string $vehicleId, string $ssd, string $locale = 'ru_RU'): UsVehicleListResponse
     {
         return $this->makeRequest(UsVehicleListResponse::class, 'GET', 'vehicle', 'identifyBySsd', [
-            'catalog' => $catalog,
+            'catalog'   => $catalog,
             'vehicleId' => $vehicleId,
-            'ssd' => $ssd,
-            'locale' => $locale,
+            'ssd'       => $ssd,
+            'locale'    => $locale,
         ]);
     }
 
@@ -253,7 +266,7 @@ class SearchService extends Service
     {
         return $this->makeRequest(UsDetailResolveResponse::class, 'GET', 'search', 'resolveDetailIdsToOemsForAutoInfo', [
             'autoInfoId' => $autoInfoId,
-            'detailId' => $detailId,
+            'detailId'   => $detailId,
         ]);
     }
 
