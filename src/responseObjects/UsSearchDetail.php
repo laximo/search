@@ -64,7 +64,17 @@ class UsSearchDetail extends Base
      * @var UsReplacement[]
      */
     public $replacements = [];
-    
+
+    /**
+     * @var string
+     */
+    public $replacesOem;
+
+    /**
+     * @var string
+     */
+    public $replacementType;
+
     /**
      * @var float
      */

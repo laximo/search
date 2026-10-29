@@ -18,9 +18,9 @@ class USException extends Exception
 
     public function __construct(array $error)
     {
-        parent::__construct($error['errCode'], $error['httpCode']);
+        parent::__construct((string) ($error['errCode'] ?? ''), (int) ($error['httpCode'] ?? 0));
 
-        $this->requestId = $error['requestId'];
-        $this->details = $error['details'];
+        $this->requestId = $error['requestId'] ?? null;
+        $this->details = $error['details'] ?? null;
     }
 }

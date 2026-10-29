@@ -35,7 +35,7 @@ class Service
      * @throws ExecutionException
      * @throws USException
      */
-    protected function makeRequest(?string $returnType, string $method, string $controller, string $action = '', array $params = [], array $body = null, string $filePath = null, string $fileName = "")
+    protected function makeRequest(?string $returnType, string $method, string $controller, string $action = '', array $params = [], ?array $body = null, ?string $filePath = null, string $fileName = "")
     {
         try {
             $request = new Request($returnType, $method, $controller, $action, $params, $body, $filePath, $fileName);
